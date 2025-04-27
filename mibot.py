@@ -28,7 +28,14 @@ async def on_message(message):
     if message.content.startswith('$hola'):
         await message.channel.send('Hola, estoy conectado y listo para el servicio')
     if message.content.startswith('$help'):
-        lista =['$hola: Saludar al bot','$help: Imprimir la ayuda de comandos del bot']
-        await message.channel.send('\n'.join(lista))
+        embed = discord.Embed(
+            title="Lista de Comandos",
+            description="Aquí tienes los comandos que puedes usar:",
+            color=discord.Color.green()
+        )
+        embed.add_field(name="$hola", value="Saludar al bot.", inline=False)
+        embed.add_field(name="$help", value="Mostrar este mensaje de ayuda.", inline=False)
+        embed.set_footer(text="Si necesitas ayuda con algun comando, escribelo sin argumentos para que este te de la ayuda")
+        await message.channel.send(embed=embed)
         
 client.run(entorno.TOKEN)
