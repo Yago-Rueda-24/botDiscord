@@ -25,7 +25,10 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+    if message.content.startswith('$hola'):
+        await message.channel.send('Hola, estoy conectado y listo para el servicio')
+    if message.content.startswith('$help'):
+        lista =['$hola: Saludar al bot','$help: Imprimir la ayuda de comandos del bot']
+        await message.channel.send('\n'.join(lista))
         
 client.run(entorno.TOKEN)
