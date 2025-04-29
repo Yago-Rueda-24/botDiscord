@@ -39,8 +39,14 @@ async def help(interaction: discord.Interaction):
     )
     embed.add_field(name="/hola", value="Saludar al bot.", inline=False)
     embed.add_field(name="/help", value="Mostrar este mensaje de ayuda.", inline=False)
+    embed.add_field(name="/decir", value="Repite el mensaje que le digas", inline=False)
     embed.set_footer(text="Si necesitas ayuda con algun comando, escribelo sin argumentos para que este te de la ayuda")
         
     await interaction.response.send_message(embed=embed)
+    
+@client.tree.command(name="decir", description="Digo lo que me mandes", guild=GUILD_ID)
+async def help(interaction: discord.Interaction,message:str):
+        
+    await interaction.response.send_message(message)
                 
 client.run(entorno.TOKEN)
