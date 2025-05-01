@@ -21,6 +21,7 @@ client = commands.Bot(command_prefix='$', intents=intents)
 async def on_ready():
     print(f'We have logged in as {client.user}')
     try:
+        await load_cogs()
         synced = await client.tree.sync(guild=GUILD_ID)  
         print(f'Slash Commands sincronizados: {len(synced)}')
     except Exception as e:
@@ -48,5 +49,10 @@ async def help(interaction: discord.Interaction):
 async def help(interaction: discord.Interaction,message:str):
         
     await interaction.response.send_message(message)
+
+async def load_cogs():
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            await client.load_extension(f'cogs.{filename[:-3]}')
                 
 client.run(entorno.TOKEN)
