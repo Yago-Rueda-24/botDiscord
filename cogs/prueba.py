@@ -14,7 +14,9 @@ class prueba(commands.Cog):
         await interaction.response.send_message(f'¡Hola, {interaction.user.name}, estoy conectado y listo para el servicio')
         
     async def cog_load(self):
+        #Registro de comnados en el arbol del cog actual
         self.bot.tree.add_command(self.saludar, guild=GUILD_ID)
 
+# Añadir el cog al bot
 async def setup(bot):
     await bot.add_cog(prueba(bot))
