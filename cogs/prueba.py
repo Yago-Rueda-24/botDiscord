@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord import app_commands
 import entorno
 
-GUILD_ID = discord.Object(id = 1365653490055254038)
+GUILD_ID = discord.Object(id = entorno.GUILD_ID)
 class prueba(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

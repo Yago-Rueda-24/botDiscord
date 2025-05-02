@@ -9,7 +9,7 @@ from discord import app_commands
 
 intents = discord.Intents.default()
 intents.message_content = True
-GUILD_ID = discord.Object(id = 1365653490055254038)
+GUILD_ID = discord.Object(id = entorno.GUILD_ID)
 client = commands.Bot(command_prefix='$', intents=intents)
 
 #Evento que se ejecuta cuando el bot esta iniciado
