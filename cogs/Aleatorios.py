@@ -42,10 +42,11 @@ class prueba(commands.Cog):
         
         resultado = randint(0,36)
         if resultado == 0:
+            
             embed = discord.Embed(
             title="Resultado de la ruleta",
             description="El resultado de la ruleta es: 0",
-            color=discord.Color.green()
+            color=discord.Color.dark_green()
             )
             await interaction.response.send_message(embed=embed)
         else:
@@ -56,18 +57,20 @@ class prueba(commands.Cog):
              paridad = "impar"
             # Determinar el color
             if resultado in rojos:
-                color = "rojo"
+                color = discord.Color.dark_red()
+                color_texto = "rojo"
             else:
-                color = "negro"
+                color = None
+                color_texto = "negro"
 
             embed = discord.Embed(
             title="Resultado de la ruleta",
             description=f"El resultado de la ruleta es: {resultado}", 
-            color=discord.Color.red() if color == "rojo" else discord.Color.dark_grey()
-
+            color=color
             )
-            embed.add_field(name="El número es {paridad}",inline=False)
-            embed.add_field(name="El color es {color}",inline=False)
+            
+            embed.add_field(name="Paridad:",value=f"El número es {paridad}",inline=False)
+            embed.add_field(name="Color",value=f"El color es {color_texto}",inline=False)
             await interaction.response.send_message(embed=embed)
 
 
