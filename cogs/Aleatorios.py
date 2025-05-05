@@ -19,15 +19,21 @@ class prueba(commands.Cog):
             await interaction.response.send_message(f'Ha salido: CARA')
     @app_commands.command(name="dado",description="Lanza un dado de n caras y anuncia el resultado")       
     async def dado(self,interaction: discord.Interaction,message:str):
-        caras = int(message)
-        if caras.isnumeric() == False:
-            await interaction.response.send_message(f'El parametro introducido no es un numero')
-        else:
+    #Comprobacion de que el mensaje es un número
+        try:
+            caras = int(message)
+        except ValueError:
+            # Si no es un número, se envía un mensaje de error
+            await interaction.response.send_message(f'El parámetro introducido no es un número válido')
+            return
+    #Calculo del resultado del dado
+        if isinstance(caras, int):
             if caras < 3:
                 await interaction.response.send_message(f'El dado no puede tener menos de 3 caras')
             else:
                 resultado = randint(1,caras)
-                await interaction.response.send_message(f'El resultado del dado de un d{caras} es: {resultado}')
+                await interaction.response.send_message(f'El resultado del dado de un d{caras} es: {resultado}')  
+                
     @app_commands.command(name="ruleta",description="Lanza la ruleta y anuncia el resultado")
     async def ruleta(self,interaction: discord.Interaction):
         # Números rojos en la ruleta europea
