@@ -20,8 +20,14 @@ class prueba(commands.Cog):
             
     async def dado(self,interaction: discord.Interaction,message:str):
         caras = int(message)
-        
-        await interaction.response.send_message(f'¡Hola, {interaction.user.name}, estoy conectado y listo para el servicio')
+        if caras.isnumeric() == False:
+            await interaction.response.send_message(f'El parametro introducido no es un numero')
+        else:
+            if caras < 3:
+                await interaction.response.send_message(f'El dado no puede tener menos de 3 caras')
+            else:
+                resultado = randint(1,caras)
+                await interaction.response.send_message(f'El resultado del dado de un d{caras} es: {resultado}')
         
     async def cog_load(self):
         #Registro de comnados en el arbol del cog actual
