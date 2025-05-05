@@ -17,7 +17,7 @@ class prueba(commands.Cog):
             await interaction.response.send_message(f'Ha salido: CRUZ')
         else:
             await interaction.response.send_message(f'Ha salido: CARA')
-            
+    @app_commands.command(name="dado",description="Lanza un dado de n caras y anuncia el resultado")       
     async def dado(self,interaction: discord.Interaction,message:str):
         caras = int(message)
         if caras.isnumeric() == False:
@@ -28,6 +28,7 @@ class prueba(commands.Cog):
             else:
                 resultado = randint(1,caras)
                 await interaction.response.send_message(f'El resultado del dado de un d{caras} es: {resultado}')
+    @app_commands.command(name="ruleta",description="Lanza la ruleta y anuncia el resultado")
     async def ruleta(self,interaction: discord.Interaction):
         # Números rojos en la ruleta europea
         rojos = [1, 3, 5, 7, 9, 12, 14, 16, 18,
