@@ -25,28 +25,19 @@ async def on_ready():
     except Exception as e:
         print(f'Error al sincronizar Slash Commands: {e}')
 
-#Función para que el bot salude al usuario
-@client.tree.command(name="hola", description="Saluda al bot", guild=GUILD_ID)
-async def hola(interaction: discord.Interaction):
-    await interaction.response.send_message(f'¡Hola, {interaction.user.name}, estoy conectado y listo para el servicio')
-# Función de ayuda del bot
-@client.tree.command(name="help", description="Muestra la ayuda del bot", guild=GUILD_ID)
-async def help(interaction: discord.Interaction):
+@client.tree.command(name="ayuda", description="Muestra la ayuda del bot", guild=GUILD_ID)
+async def ayuda(interaction: discord.Interaction):
     embed = discord.Embed(
             title="Lista de Comandos",
             description="Aquí tienes los comandos que puedes usar:",
             color=discord.Color.green()
     )
-    embed.add_field(name="/hola", value="Saludar al bot.", inline=False)
-    embed.add_field(name="/help", value="Mostrar este mensaje de ayuda.", inline=False)
-    embed.add_field(name="/decir", value="Repite el mensaje que le digas", inline=False)
+    for command in client.tree.get_commands():
+        embed.add_field(name=f"/{command.name}", value=command.description, inline=False)
+        
     embed.set_footer(text="Si necesitas ayuda con algun comando, escribelo sin argumentos para que este te de la ayuda")
         
     await interaction.response.send_message(embed=embed)
-#Función que repite el mensaje del usuario
-@client.tree.command(name="decir", description="Digo lo que me mandes", guild=GUILD_ID)
-async def help(interaction: discord.Interaction,message:str):
-    await interaction.response.send_message(message)
 
 # Función que añade todos los cogs al bot
 async def load_cogs():
